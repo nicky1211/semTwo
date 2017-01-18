@@ -14,6 +14,7 @@ class Spider:
 			href = link.get('href')
 			href = "https://en.wikipedia.org"+href
 			self.subcategory_crawl_list.append(href)
+		assert(len(self.subcategory_crawl_list) == 32)
 		return self.subcategory_crawl_list
 
 	def category_spider(self):
@@ -24,7 +25,9 @@ class Spider:
 			href = each.find('a')['href']
 			href = "https://en.wikipedia.org"+href
 			self.category_crawl_list.append(href)
+		assert(len(self.category_crawl_listt) == 33)
 		return self.category_crawl_list
+
 
 
 if __name__ == '__main__':
@@ -32,4 +35,4 @@ if __name__ == '__main__':
 	url = 'https://en.wikipedia.org/wiki/Category:Diseases_and_disorders'
 	spider = Spider(url)
 	list1 = spider.subcategory_spider()
-	print list1
+	list2 = spider.category_spider()
