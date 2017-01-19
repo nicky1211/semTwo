@@ -25,8 +25,20 @@ class Spider:
 			href = each.find('a')['href']
 			href = "https://en.wikipedia.org"+href
 			self.category_crawl_list.append(href)
-		assert(len(self.category_crawl_listt) == 33)
+		assert(len(self.category_crawl_list) == 33)
 		return self.category_crawl_list
+
+class CrawlL1:
+
+	def maincrawler(self,url):
+		source_code = requests.get(url)
+		plain_text = source_code.text
+		soup = BeautifulSoup(plain_text,"lxml")
+		for link in soup.findAll('a',{'class':'CategoryTreeLabel  CategoryTreeLabelNs14 CategoryTreeLabelCategory'}):
+			href = link.get('href')
+			href = "https://en.wikipedia.org"+href
+			print href
+
 
 
 
@@ -36,3 +48,6 @@ if __name__ == '__main__':
 	spider = Spider(url)
 	list1 = spider.subcategory_spider()
 	list2 = spider.category_spider()
+	crawl = CrawlL1()
+	for each in list1:
+		crawl.maincrawler(each)
