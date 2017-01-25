@@ -13,14 +13,12 @@ def getaTags(soup):
     return linkList
 
 def getDiseaseCategoryLinks(aTags):
-    hrefList = []
-    testDict = {}
+    linkDict = {}
     for href in aTags[44:77]:
     	cateGory = re.findall(r'/(\w+)', href)[1]
         href = "https://en.wikipedia.org"+ href
-        testDict[cateGory] = href
-        # hrefList.append(each)
-    return testDict
+        linkDict[cateGory] = href
+    return linkDict
 
 aTags = getaTags(soup) 
 links = getDiseaseCategoryLinks(aTags)
