@@ -1,4 +1,5 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 source_code = requests.get('https://en.wikipedia.org/wiki/Category:Diseases_and_disorders')
 plain_text = source_code.text
@@ -13,11 +14,13 @@ def getaTags(soup):
 
 def getDiseaseCategoryLinks(aTags):
     hrefList = []
-    for each in aTags[43:77]:
-        each = "https://en.wikipedia.org"+each
-        hrefList.append(each)
-    return hrefList
+    testDict = {}
+    for href in aTags[44:77]:
+    	cateGory = re.findall(r'/(\w+)', href)[1]
+        href = "https://en.wikipedia.org"+ href
+        testDict[cateGory] = href
+        # hrefList.append(each)
+    return testDict
 
 aTags = getaTags(soup) 
 links = getDiseaseCategoryLinks(aTags)
-print links
